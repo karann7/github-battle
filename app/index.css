@@ -1,3 +1,20 @@
 body {
-    background-color: green;
+    background-color: lightblue;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+ul {
+    padding: 0;
+}
+.languages {
+    display: flex;
+    justify-content: center;
+}
+.languages li {
+    margin: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    list-style: none;
 }

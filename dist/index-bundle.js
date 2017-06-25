@@ -22443,7 +22443,7 @@ exports = module.exports = __webpack_require__(186)(undefined);
 
 
 // module
-exports.push([module.i, "body {\n    background-color: green;\n}", ""]);
+exports.push([module.i, "body {\n    background-color: lightblue;\n}\n.container {\n    max-width: 1200px;\n    margin: 0 auto;\n}\nul {\n    padding: 0;\n}\n.languages {\n    display: flex;\n    justify-content: center;\n}\n.languages li {\n    margin: 10px;\n    font-weight: bold;\n    cursor: pointer;\n    list-style: none;\n}", ""]);
 
 // exports
 
@@ -23028,8 +23028,7 @@ var App = function (_Component) {
 		value: function render() {
 			return _react2.default.createElement(
 				'div',
-				null,
-				'Github | Battle',
+				{ className: 'container' },
 				_react2.default.createElement(_Popular2.default, null)
 			);
 		}
@@ -23068,19 +23067,53 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Popular = function (_Component) {
   _inherits(Popular, _Component);
 
-  function Popular() {
+  function Popular(props) {
     _classCallCheck(this, Popular);
 
-    return _possibleConstructorReturn(this, (Popular.__proto__ || Object.getPrototypeOf(Popular)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Popular.__proto__ || Object.getPrototypeOf(Popular)).call(this, props));
+
+    _this.state = { selectedLanguage: 'All' };
+    return _this;
   }
 
   _createClass(Popular, [{
+    key: 'updateLanguage',
+    value: function updateLanguage(lang) {
+      this.setState(function () {
+        return {
+          selectedLanguage: lang
+        };
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
+      var languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
+
       return _react2.default.createElement(
         'div',
         null,
-        'Popular!n'
+        _react2.default.createElement(
+          'ul',
+          { className: 'languages' },
+          languages.map(function (lang) {
+            return _react2.default.createElement(
+              'li',
+              {
+                style: lang === _this2.state.selectedLanguage ? { color: 'red' } : null,
+                key: lang,
+                onClick: _this2.updateLanguage.bind(_this2, lang) },
+              lang
+            );
+          })
+        ),
+        _react2.default.createElement(
+          'h1',
+          null,
+          this.state.selectedLanguage
+        )
       );
     }
   }]);
