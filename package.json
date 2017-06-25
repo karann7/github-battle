@@ -6,7 +6,7 @@
   "scripts": {
     "create": "webpack",
     "watch": "webpack -w",
-    "start": "webpack-dev-server --open"
+    "start": "webpack-dev-server"
   },
   "babel": {
     "presets": [ "env", "react" ]

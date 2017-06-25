@@ -13,8 +13,13 @@ module.exports = {
 		]
   },
 	resolve: {
+    modules: [
+      path.join(__dirname, "app"),
+      "node_modules"
+    ],
 			alias: {
-				App: './components/App'
+				App: 'components/App',
+        Popular: 'components/Popular'
     },
     extensions: ['*', '.js', '.jsx']
   },
