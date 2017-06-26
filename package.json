@@ -9,12 +9,16 @@
     "start": "webpack-dev-server"
   },
   "babel": {
-    "presets": [ "env", "react" ]
+    "presets": [
+      "env",
+      "react"
+    ]
   },
   "keywords": [],
   "author": "Karan Singh",
   "license": "ISC",
   "dependencies": {
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
   },

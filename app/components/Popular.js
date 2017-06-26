@@ -1,36 +1,54 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-export default class Popular extends Component {
-  constructor(props){
-    super(props);
-    this.state = { selectedLanguage: 'All'};
+// Functional component because state is passed down as props.
+function SelectLanguage (props) {
+  var languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
+  return (
+    <ul className='languages'>
+      {languages.map(function (lang) {
+        return (
+          <li
+            style={lang === props.selectedLanguage ? {color: '#d0021b'} : null}
+            onClick={props.onSelect.bind(null, lang)}
+            key={lang}>
+              {lang}
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
+// used to ensure that the values passed in are what they are suppose to be
+SelectLanguage.propTypes = {
+  selectedLanguage: PropTypes.string.isRequired,
+  onSelect: PropTypes.func.isRequired,
+};
+// only component that maintains state and passes it down as props
+class Popular extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      selectedLanguage: 'All',
+    };
+    this.updateLanguage = this.updateLanguage.bind(this);
   }
   updateLanguage(lang) {
-    this.setState(function(){
+    this.setState(function () {
       return {
-        selectedLanguage: lang
+        selectedLanguage: lang,
       }
-    })
+    });
   }
-  render(){
-    var languages = [ 'All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python' ];
-
+  render() {
     return (
       <div>
-        <ul className="languages">
-          {languages.map((lang)=>{
-            return (
-              <li
-              style={lang === this.state.selectedLanguage ? {color: 'red'}: null}
-              key={lang}
-              onClick={this.updateLanguage.bind(this, lang)}>
-              {lang}
-              </li>
-            );
-          })}
-        </ul>
-      <h1>{this.state.selectedLanguage}</h1>
+        <SelectLanguage
+          selectedLanguage={this.state.selectedLanguage}
+          onSelect={this.updateLanguage} />
       </div>
-    );
+    )
   }
 }
+
+export default Popular;
