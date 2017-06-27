@@ -19,7 +19,8 @@ module.exports = {
     ],
 			alias: {
 				App: 'components/App',
-        Popular: 'components/Popular'
+        Popular: 'components/Popular',
+        Api: 'utils/api'
     },
     extensions: ['*', '.js', '.jsx']
   },

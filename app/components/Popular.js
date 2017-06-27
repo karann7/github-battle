@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Api from 'Api';
 
 // Functional component because state is passed down as props.
 function SelectLanguage (props) {
@@ -19,6 +20,26 @@ function SelectLanguage (props) {
     </ul>
   )
 }
+// this renders the results into a usuable format
+function RepoGrid (props) {
+  return (
+    <ul className='popular-list'>
+      {props.repos.map(function(repo, index){
+        <li className='popular-item' key={repo.name}>
+          <div className='popular-rank'>#{index + 1}</div>
+          <ul className='space-list-items'>
+            <li>
+              <img
+                className='avatar'
+                src={repo.owner.avatar_url}
+                alt={`Avatar for ${repo.owner.login}`} />
+            </li>
+          </ul>
+        </li> 
+      })}
+    </ul>
+  )
+}
 // used to ensure that the values passed in are what they are suppose to be
 SelectLanguage.propTypes = {
   selectedLanguage: PropTypes.string.isRequired,
@@ -30,15 +51,28 @@ class Popular extends Component {
     super();
     this.state = {
       selectedLanguage: 'All',
+      repos: null
     };
     this.updateLanguage = this.updateLanguage.bind(this);
+  }
+  componentDidMount(){
+    this.updateLanguage(this.state.selectedLanguage);
   }
   updateLanguage(lang) {
     this.setState(function () {
       return {
         selectedLanguage: lang,
+        repos: null
       }
     });
+    Api.fetchPopularRepos(lang)
+      .then(function(repos) {
+        this.setState(function() {
+          return {
+            repos: repos
+          }
+        })
+      }.bind(this));
   }
   render() {
     return (
@@ -46,6 +80,7 @@ class Popular extends Component {
         <SelectLanguage
           selectedLanguage={this.state.selectedLanguage}
           onSelect={this.updateLanguage} />
+          <RepoGrid repos={this.state.repos} />
       </div>
     )
   }
