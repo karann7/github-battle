@@ -4,13 +4,17 @@ module.exports = {
   entry: './app/index.js',
   output: {
 			path: path.resolve(__dirname, 'docs'),
-			filename: 'index-bundle.js'
+			filename: 'index-bundle.js',
+      publicPath: '/'
   },
 	module: {
 		rules: [
 			{ test: /\.(js)$/, exclude: /node_modules/, use: 'babel-loader' },
 			{ test: /\.css$/, exclude: /node_modules/, use: [ 'style-loader', 'css-loader' ]}
 		]
+  },
+  devServer: {
+    historyApiFallback: true
   },
 	resolve: {
     modules: [
