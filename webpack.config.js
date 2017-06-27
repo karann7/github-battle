@@ -27,7 +27,9 @@ module.exports = {
         Api: 'utils/api',
         Nav: 'components/Nav',
         Home: 'components/Home',
-        Battle: 'components/Battle'
+        Battle: 'components/Battle',
+        PlayerInput: 'components/PlayerInput',
+        PlayerPreview: 'components/PlayerPreview'
     },
     extensions: ['*', '.js', '.jsx']
   },
