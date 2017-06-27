@@ -20,7 +20,10 @@ module.exports = {
 			alias: {
 				App: 'components/App',
         Popular: 'components/Popular',
-        Api: 'utils/api'
+        Api: 'utils/api',
+        Nav: 'components/Nav',
+        Home: 'components/Home',
+        Battle: 'components/Battle'
     },
     extensions: ['*', '.js', '.jsx']
   },
