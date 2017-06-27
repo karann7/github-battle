@@ -18,14 +18,15 @@ function SelectLanguage (props) {
         )
       })}
     </ul>
-  )
+  );
 }
 // this renders the results into a usuable format
 function RepoGrid (props) {
   return (
     <ul className='popular-list'>
       {props.repos.map(function(repo, index){
-        <li className='popular-item' key={repo.name}>
+        return (
+          <li className='popular-item' key={repo.name}>
           <div className='popular-rank'>#{index + 1}</div>
           <ul className='space-list-items'>
             <li>
@@ -34,17 +35,25 @@ function RepoGrid (props) {
                 src={repo.owner.avatar_url}
                 alt={`Avatar for ${repo.owner.login}`} />
             </li>
+            <li> <a href={repo.html_url}>{repo.name}</a></li>
+            <li>@{repo.owner.login}</li>
+            <li>{repo.stargazers_count} Stars</li>
           </ul>
         </li> 
+        );
       })}
     </ul>
-  )
+  );
 }
 // used to ensure that the values passed in are what they are suppose to be
 SelectLanguage.propTypes = {
   selectedLanguage: PropTypes.string.isRequired,
-  onSelect: PropTypes.func.isRequired,
+  onSelect: PropTypes.func.isRequired
 };
+
+RepoGrid.propTypes = {
+  repos: PropTypes.array.isRequired
+}
 // only component that maintains state and passes it down as props
 class Popular extends Component {
   constructor(props) {
@@ -80,7 +89,9 @@ class Popular extends Component {
         <SelectLanguage
           selectedLanguage={this.state.selectedLanguage}
           onSelect={this.updateLanguage} />
-          <RepoGrid repos={this.state.repos} />
+          {!this.state.repos
+            ? <p>LOADING</p>
+            : <RepoGrid repos={this.state.repos} />}
       </div>
     )
   }
