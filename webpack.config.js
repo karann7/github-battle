@@ -29,7 +29,8 @@ module.exports = {
         Home: 'components/Home',
         Battle: 'components/Battle',
         PlayerInput: 'components/PlayerInput',
-        PlayerPreview: 'components/PlayerPreview'
+        PlayerPreview: 'components/PlayerPreview',
+        Results: 'components/Results'
     },
     extensions: ['*', '.js', '.jsx']
   },

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PlayerInput from 'PlayerInput';
 import PlayerPreview from 'PlayerPreview';
+import { Link } from 'react-router-dom';
 
 class Battle extends Component {
   constructor(props){
@@ -12,6 +13,7 @@ class Battle extends Component {
       playerTwoImage: null
     }
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
   handleSubmit(id, username){
     this.setState(function(){
@@ -21,7 +23,16 @@ class Battle extends Component {
       return newState;
     });
   }
+  handleReset(id){
+    this.setState(function(){
+      var newState = {};
+      newState[`${id}Name`] = '';
+      newState[`${id}Image`] = null;
+      return newState;
+    });
+  }
   render() {
+    let match = this.props.match;
     let playerOneName = this.state.playerOneName;
     let playerTwoName = this.state.playerTwoName;
     let playerOneImage = this.state.playerOneImage;
@@ -51,8 +62,21 @@ class Battle extends Component {
               label='Player Two'
               onSubmit={this.handleSubmit}
             />}
-        </div>
 
+            {playerTwoImage !== null &&
+            <PlayerPreview 
+              avatar={playerTwoImage}
+              username={playerTwoName}
+              onReset={this.handleReset}
+              id='playerTwo'
+              />}
+        </div>
+        {playerOneImage && playerTwoImage &&
+          <Link className='button' to={{
+            pathname: `${match.url}/results`,
+            search: `?playerOneName=${playerOneName}&playerTwoName=${playerTwoName}`
+          }}>Battle</Link>
+        }
       </div>
     );
   }
