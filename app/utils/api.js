@@ -8,7 +8,7 @@ function getProfile(username) {
 }
 
 function getRepos (username) {
-  return axios.get(`https://api.github.com/users/${username}&per_page=100`);
+  return axios.get(`https://api.github.com/users/${username}/repos`);
 }
 
 function getStarCount (repos) {
@@ -48,7 +48,7 @@ function sortPlayers (players) {
 
 export default {
   battle: function(players) {
-    return axios.all(player.map(getUserData))
+    return axios.all(players.map(getUserData))
       .then(sortPlayers)
       .catch(handleError);
   },

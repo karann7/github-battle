@@ -30,7 +30,8 @@ module.exports = {
         Battle: 'components/Battle',
         PlayerInput: 'components/PlayerInput',
         PlayerPreview: 'components/PlayerPreview',
-        Results: 'components/Results'
+        Results: 'components/Results',
+        WinnerLoser: 'components/WinnerLoser'
     },
     extensions: ['*', '.js', '.jsx']
   },
